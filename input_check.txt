@@ -1,0 +1,28 @@
+### Test Inputs for `text_preprocessing()` Function
+
+1. **Lowercasing Text**
+This is a TEST
+
+2. **HTML Special Entities**
+Welcome &amp; enjoy your &quot;stay&quot;!
+
+3. **Dots in Thousand Separators**
+Price: Rp5.000 and Rp10.000
+
+4. **Hyperlinks like `example.com` or `example.co.id`**
+Check this out google.com or website.co.id
+
+5. **Hyperlinks with `http`**
+Visit http://www.google.com or http://example.com
+
+6. **Non-ASCII Characters**
+This text contains 日本語 and other symbols
+
+7. **Multiple Spaces**
+This    has    multiple   spaces
+
+8. **Replace `\x02` with a Hyphen**
+This\x02is\x02a\x02test
+
+9. **Leading/Trailing Spaces**
+  This has leading and trailing spaces  
