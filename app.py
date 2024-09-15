@@ -35,7 +35,7 @@ def text_preprocessing(text):
 
 text = text_preprocessing(text)
 
-model_path = "./model_bilstm_epoch-100_batch-64_BahasaIndonesia.h5"
+model_path = "./model_bilstm-mh_attm_epoch-100_batch-64_ALL.h5"
 max_enc_len = 14
 max_dec_len = 15
 
