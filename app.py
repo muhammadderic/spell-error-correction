@@ -6,7 +6,7 @@ import tensorflow as tf
 
 st.title('Spell Error Correction')
 
-text = st.text_input('Input text')
+text = st.text_area('Input your text here', height=200)
 
 submit = st.button('Correcting')
 
