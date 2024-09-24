@@ -51,7 +51,7 @@ for i in range(len(codes)):
 input_seq, word_index = tokenization(text)
 
 # Padding Sequencing
-input_seq_pad = padding_sequencing(input_seq, text)
+input_seq_pad = padding_sequencing(input_seq)
 
 # Split words
 def split_word(sentence: str): return sentence.split(' ')
