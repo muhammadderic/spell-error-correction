@@ -1,9 +1,9 @@
 import tensorflow as tf
 
-def tokenization(text):
+def get_word_index(text):
     tokenizer = tf.keras.preprocessing.text.Tokenizer(oov_token='oov')
     tokenizer.fit_on_texts(text)
 
-    input_seq = tokenizer.texts_to_sequences(text)
+    word_index = tokenizer.word_index
 
-    return input_seq
+    return word_index

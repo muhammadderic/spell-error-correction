@@ -6,6 +6,7 @@ import tensorflow as tf
 from utils.text_preprocessing import text_preprocessing
 from utils.load_model import load_model
 from utils.tokenizer import tokenization
+from utils.get_word_index import get_word_index
 from utils.padding_sequencing import padding_sequencing
 from utils.embedding import embedding
 from utils.show_text_prediction import show_text_prediction
@@ -48,7 +49,7 @@ for i in range(len(codes)):
     count+=1
 
 # Tokenization
-input_seq, word_index = tokenization(text)
+input_seq = tokenization(text)
 
 # Padding Sequencing
 input_seq_pad = padding_sequencing(input_seq)
@@ -57,6 +58,9 @@ input_seq_pad = padding_sequencing(input_seq)
 def split_word(sentence: str): return sentence.split(' ')
 
 words = split_word(text)
+
+# Get word index
+word_index = get_word_index(text)
 
 # Embedding
 embedding_matrix = embedding(words, word_index)
