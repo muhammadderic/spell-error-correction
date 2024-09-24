@@ -48,23 +48,6 @@ for i in range(len(codes)):
     int2char[count] = code
     count+=1
 
-# Tokenization
-input_seq = tokenization(text)
-
-# Padding Sequencing
-input_seq_pad = padding_sequencing(input_seq)
-
-# Split words
-def split_word(sentence: str): return sentence.split(' ')
-
-words = split_word(text)
-
-# Get word index
-word_index = get_word_index(text)
-
-# Embedding
-embedding_matrix = embedding(words, word_index)
-
 # Load correction model   
 model = load_model(model_path)
 
@@ -163,26 +146,44 @@ sentence = generate_corrected_sentence(text)
 st.success(sentence)
 
 # Detection sentence
-# Transposition
-y_trans_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
-show_text_prediction(y_trans_pred, "transposition")
+if submit:
+    # Tokenization
+    input_seq = tokenization(text)
 
-# Punctuation
-y_punc_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
-show_text_prediction(y_punc_pred, "punctuation")
+    # Padding Sequencing
+    input_seq_pad = padding_sequencing(input_seq)
 
-# Substitution
-y_subs_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
-show_text_prediction(y_subs_pred, "substitution")
+    # Split words
+    def split_word(sentence: str): return sentence.split(' ')
 
-# Real-word
-y_rw_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
-show_text_prediction(y_rw_pred, "real-word")
+    words = split_word(text)
 
-# Deletion
-y_del_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
-show_text_prediction(y_del_pred, "deletion")
+    # Get word index
+    word_index = get_word_index(text)
 
-# Insertion
-y_ins_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
-show_text_prediction(y_ins_pred, "insertion")
+    # Embedding
+    embedding_matrix = embedding(words, word_index)
+
+    # Transposition
+    y_trans_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
+    show_text_prediction(y_trans_pred, "transposition")
+
+    # Punctuation
+    y_punc_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
+    show_text_prediction(y_punc_pred, "punctuation")
+
+    # Substitution
+    y_subs_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
+    show_text_prediction(y_subs_pred, "substitution")
+
+    # Real-word
+    y_rw_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
+    show_text_prediction(y_rw_pred, "real-word")
+
+    # Deletion
+    y_del_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
+    show_text_prediction(y_del_pred, "deletion")
+
+    # Insertion
+    y_ins_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
+    show_text_prediction(y_ins_pred, "insertion")
