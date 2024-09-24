@@ -1,43 +1,37 @@
 import string
 import numpy as np
 import streamlit as st
-import re
 import tensorflow as tf
 
+from utils.text_preprocessing import text_preprocessing
+from utils.load_model import load_model
+from utils.tokenizer import tokenization
+from utils.padding_sequencing import padding_sequencing
+from utils.embedding import embedding
+from utils.show_text_prediction import show_text_prediction
+
+# Variables
+model_path = "./model_bilstm-mh_attm_epoch-100_batch-64_ALL.h5"
+
+model_trans_fn = f"./models/model_text_clf_v3_transposition_6.h5"
+model_punc_fn = f"./models/model_text_clf_v3_punctuation_6.h5"
+model_subs_fn = f"./models/model_text_clf_v3_substitution_6.h5"
+model_rw_fn = f"./models/model_text_clf_v3_real-word_6.h5"
+model_del_fn = f"./models/model_text_clf_v3_deletion_6.h5"
+model_ins_fn = f"./models/model_text_clf_v3_insertion_6.h5"
+
+max_enc_len = 14
+max_dec_len = 15
+
+# Initial title
 st.title('Spell Error Correction')
 
 text = st.text_area('Input your text here')
 
 submit = st.button('Correcting')
 
-def text_preprocessing(text):
-    # lowering text
-    t = str(text).lower()
-    # hapus HTML special entities, contoh: &amp; / &quot;
-    # t = re.sub(r'\&\w*;', '', t)
-    t = re.sub(r'&\w+;', '', t)
-    # hapus titik (.) dalam angka ribuan, contoh: Rp5.000
-    t = re.sub("\\.+(?=\d)", "", t)
-    # hapus hyperlinks, contoh: google.com
-    # t = re.sub('(\w*).(com|co.id)', '', t) 
-    t = re.sub(r'\b\w+\.(com|co\.id)\b', '', t)
-    # hapus hyperlinks, contoh: http://www.google.com
-    t = re.sub(r'http\S+', '', t)
-    # hapus karakter non-ascii
-    t = re.sub('[^\x00-\x7F]+', ' ', t)
-    # Replace ASCII control character \x02 with a hyphen
-    t = re.sub('\x02', '-', t)
-    # Remove multiple spaces
-    t = re.sub(r'\s{2,}', ' ', t)
-    # hapus spasi di kanan & kiri
-    t = t.strip()
-    return t
-
+# Text preprocessing
 text = text_preprocessing(text)
-
-model_path = "./model_bilstm-mh_attm_epoch-100_batch-64_ALL.h5"
-max_enc_len = 14
-max_dec_len = 15
 
 # Create encode and decode dictionary
 char_set = list(" abcdefghijklmnopqrstuvwxyz0123456789") + [x for x in string.punctuation]
@@ -53,16 +47,30 @@ for i in range(len(codes)):
     int2char[count] = code
     count+=1
 
-def load_model(model_path):
-    try:
-        model = tf.keras.models.load_model(model_path)
-        print("Model loaded successfully.")
-        return model
-    except Exception as e:
-        print(f"Error loading the model: {e}")
-        return None
-    
+# Tokenization
+input_seq, word_index = tokenization(text)
+
+# Padding Sequencing
+input_seq_pad = padding_sequencing(input_seq, text)
+
+# Split words
+def split_word(sentence: str): return sentence.split(' ')
+
+words = split_word(text)
+
+# Embedding
+embedding_matrix = embedding(words, word_index)
+
+# Load correction model   
 model = load_model(model_path)
+
+# Load detection models
+model_trans = load_model(model_trans_fn)
+model_punc = load_model(model_punc_fn)
+model_subs = load_model(model_subs_fn)
+model_rw = load_model(model_rw_fn)
+model_del = load_model(model_del_fn)
+model_ins = load_model(model_ins_fn)
 
 
 # Load dictionary Reads a text file and converts its contents into a list of words.
@@ -77,7 +85,6 @@ def file_to_word_list(file_path):
 
 # Load dictionary
 sastrawi_dictionary = file_to_word_list("./sastrawi_dictionary.txt")
-
 
 # Convert word to vector
 def encode_word(word: list):
@@ -150,3 +157,28 @@ def generate_corrected_sentence(sentence: str):
 sentence = generate_corrected_sentence(text)
 
 st.success(sentence)
+
+# Detection sentence
+# Transposition
+y_trans_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
+show_text_prediction(y_trans_pred, "transposition")
+
+# Punctuation
+y_punc_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
+show_text_prediction(y_punc_pred, "punctuation")
+
+# Substitution
+y_subs_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
+show_text_prediction(y_subs_pred, "substitution")
+
+# Real-word
+y_rw_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
+show_text_prediction(y_rw_pred, "real-word")
+
+# Deletion
+y_del_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
+show_text_prediction(y_del_pred, "deletion")
+
+# Insertion
+y_ins_pred = model_trans.predict(embedding_matrix, verbose=0).argmax(axis=-1)
+show_text_prediction(y_ins_pred, "insertion")
