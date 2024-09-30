@@ -16,9 +16,9 @@ from utils.detection.show_text_prediction import show_text_prediction
 from utils.correction.load_dictionary import load_dictionary
 
 # Variables
-model_corr_fn = './model_bilstm-mh_attm_epoch-100_batch-64_ALL.h5'
+model_corr_fn = './models/model_bilstm-mh_attm_epoch-100_batch-64_ALL.h5'
 
-model_det_fn = './word_error_detection_all_subjects.h5'
+model_det_fn = './models/word_error_detection_all_subjects.h5'
 
 # Header
 header_left, header_right = st.columns([1,5], vertical_alignment="center")
