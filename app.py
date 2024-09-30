@@ -92,5 +92,5 @@ if detection_result == 1:
     st.text("Hasil koreksi:")
     st.info(sentence)
 
-    with st.popover("Koreksi kalimat, jika kalimat salah"):
+    with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
         correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
