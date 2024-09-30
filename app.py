@@ -93,5 +93,4 @@ if detection_result == 1:
     st.info(sentence)
 
     with st.popover("Koreksi kalimat, jika kalimat salah"):
-        correct_sentence = st.text_input("Kalimat yang benar menurut anda adalah:")
-        st.button("Simpan kalimat benar", on_click=st.experimental_rerun)
+        correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
