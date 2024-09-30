@@ -91,9 +91,12 @@ if submit:
     y_pred = model_det.predict(embedding_matrix, verbose=0).argmax(axis=-1)
     detection_result = show_text_prediction(y_pred)
 
+    # Show the button again
+    time.sleep(1)
+    placeholder.button('Koreksi')
+
 # Correction sentence
 if detection_result == 1:
-    time.sleep(1)
 
     sentence = generate_corrected_sentence(sastrawi_dictionary, char_set, char2int, int2char, model_corr, text)
 
@@ -103,6 +106,3 @@ if detection_result == 1:
 
         with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
             correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
-
-# Show the button again
-placeholder.button('Koreksi')
