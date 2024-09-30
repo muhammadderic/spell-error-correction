@@ -90,7 +90,7 @@ if detection_result == 1:
 
     sentence = generate_corrected_sentence(sastrawi_dictionary, char_set, char2int, int2char, model_corr, text)
 
-    with st.spinner('Wait for it...'):
+    with st.spinner('Sedang mengkoreksi...'):
         st.subheader("Hasil koreksi:")
         st.info(sentence)
 
