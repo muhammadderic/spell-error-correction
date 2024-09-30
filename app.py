@@ -25,24 +25,9 @@ max_enc_len = 14
 max_dec_len = 15
 
 # Header
-st.markdown(
-    """
-    <style>
-    .header-img {
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Shadow under the image */
-    }
-    h1 {
-        text-align: center; /* Center the title */
-    }
-    </style>
-    """, 
-    unsafe_allow_html=True
-)
+st.image("assets/peka.jpeg", width=200)
 
 st.title('Spell Error Correction')
-
-# Apply the CSS to the image
-st.markdown('<img class="header-img" src="./assets/peka.jpeg" style="width: 200px;">', unsafe_allow_html=True)
 
 text = st.text_area('Masukkan kalimat')
 
