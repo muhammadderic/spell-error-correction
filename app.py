@@ -24,12 +24,27 @@ model_ins_fn = f"./models/model_text_clf_v3_insertion_6.h5"
 max_enc_len = 14
 max_dec_len = 15
 
-# Initial title
+# Header
+st.image("./assets/peka.png", use_column_width=True)
 st.title('Spell Error Correction')
 
-text = st.text_area('Input your text here')
+st.markdown(
+    """
+    <style>
+    .header-img {
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Shadow under the image */
+    }
+    h1 {
+        text-align: center; /* Center the title */
+    }
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
 
-submit = st.button('Correcting')
+text = st.text_area('Masukkan kalimat')
+
+submit = st.button('Koreksi')
 
 # Text preprocessing
 text = text_preprocessing(text)
