@@ -89,7 +89,7 @@ if submit:
 if detection_result == 1:
     sentence = generate_corrected_sentence(sastrawi_dictionary, char_set, char2int, int2char, model_corr, text)
 
-    st.text("Hasil koreksi:")
+    st.subheader("Hasil koreksi:")
     st.info(sentence)
 
     with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
