@@ -4,6 +4,7 @@ import streamlit as st
 from utils.correction.main_correction import generate_corrected_sentence
 from utils.text_preprocessing import text_preprocessing
 from utils.load_model import load_model
+from utils.user_correction import show_correction_dialog
 
 # From detection folder
 from utils.detection.tokenizer import tokenization
@@ -89,4 +90,13 @@ if submit:
 if detection_result == 1:
     sentence = generate_corrected_sentence(sastrawi_dictionary, char_set, char2int, int2char, model_corr, text)
 
-    st.success(sentence)
+    st.text("Hasil koreksi:")
+    st.info(sentence)
+
+    # Show the correction dialog and capture the reason
+    reason = show_correction_dialog()
+
+    if reason:
+        st.write(f"Reason for correction: {reason}")
+    else:
+        st.write("No correction submitted yet.")
