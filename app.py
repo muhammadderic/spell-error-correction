@@ -28,10 +28,10 @@ max_dec_len = 15
 header_left, header_right = st.columns([1,5], vertical_alignment="center")
 
 with header_left:
-    st.image("assets/peka.jpeg", width=150)
+    st.image("assets/peka.jpeg", width=120)
 
 with header_right:
-    st.title('Pendeteksi dan Koreksi Ejaan')
+    st.subheader('Pendeteksi dan Koreksi Ejaan')
 
 text = st.text_area('Masukkan kalimat')
 
