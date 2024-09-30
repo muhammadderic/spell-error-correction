@@ -25,7 +25,7 @@ max_enc_len = 14
 max_dec_len = 15
 
 # Header
-st.image("./assets/peka.png", use_column_width=True)
+st.image("assets/peka.png", caption="peka company logo")
 st.title('Spell Error Correction')
 
 st.markdown(
