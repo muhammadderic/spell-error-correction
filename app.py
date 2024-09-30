@@ -34,8 +34,7 @@ with header_right:
 text = st.text_area('Masukkan kalimat')
 
 # Create a placeholder for the button
-placeholder = st.empty()
-submit = placeholder.button('Koreksi', key='tombol_koreksi')
+submit = st.button('Koreksi', key='tombol_koreksi')
 
 # Text preprocessing
 text = text_preprocessing(text)
@@ -67,9 +66,6 @@ detection_result = 0
 
 # Detection sentence
 if submit:
-    # Remove the button (make it hidden)
-    placeholder.empty()
-
     # Tokenization
     input_seq = tokenization(text)
 
@@ -90,10 +86,6 @@ if submit:
     # Detection
     y_pred = model_det.predict(embedding_matrix, verbose=0).argmax(axis=-1)
     detection_result = show_text_prediction(y_pred)
-
-    # Show the button again
-    time.sleep(1)
-    placeholder.button('Koreksi', key='tombol_koreksi_baru')
 
 # Correction sentence
 if detection_result == 1:
