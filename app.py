@@ -25,9 +25,13 @@ max_enc_len = 14
 max_dec_len = 15
 
 # Header
-st.image("assets/peka.jpeg", width=200)
+header_left, header_right = st.columns([1,5])
 
-st.title('Spell Error Correction')
+with header_left:
+    st.image("assets/peka.jpeg", width=200)
+
+with header_right:
+    st.title('Spell Error Correction')
 
 text = st.text_area('Masukkan kalimat')
 
