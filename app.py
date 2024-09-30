@@ -94,39 +94,20 @@ if detection_result == 1:
 
     # reason = ""
 
-    # # Show the correction dialog and capture the reason
-    # def vote():
-    #     reason = st.text_input("Masukkan kalimat yang benar")
-    #     if st.button("Koreksi"):
-    #         return reason
-
-    # if "vote" not in st.session_state:
-    #     st.write("Apakah kalimat koreksi sudah benar?")
-    #     if st.button("👍"):
-    #         reason = "Kalimat sudah benar"
-    #     if st.button("👎"):
-    #         reason = vote()
-
-# Function for correction input when the user votes "thumbs-down"
+# Show the correction dialog and capture the reason
+@st.dialog("Koreksi")
 def vote():
     reason = st.text_input("Masukkan kalimat yang benar")
     if st.button("Koreksi"):
-        st.session_state.vote_reason = reason  # Store in session state
-        st.experimental_rerun()  # Rerun the app to update the UI
-    return None  # Return None until a correction is made
+        st.session_state.vote = {"reason": reason}
+        st.rerun()
 
-# Main dialog logic
-if "vote_reason" not in st.session_state:  # Check if vote has been cast
+if "vote" not in st.session_state and detection_result == 1:
     st.write("Apakah kalimat koreksi sudah benar?")
-
-    col1, col2 = st.columns(2)  # Display thumbs-up and thumbs-down in two columns
-    with col1:
-        if st.button("👍"):
-            st.session_state.vote_reason = "Kalimat sudah benar"  # Store the thumbs-up reason
-            st.experimental_rerun()  # Rerun to show the result
-    with col2:
-        if st.button("👎"):
-            vote()  # Call the vote function to allow user to correct the sentence
+    if st.button("👍"):
+        st.session_state.vote = {"reason": "Kalimat sudah benar"}
+        st.rerun()
+    if st.button("👎"):
+        vote()
 else:
-    # Display the vote result
-    st.write(f"Terima kasih telah mengkoreksi! Alasan: {st.session_state.vote_reason}")
+    f"Kalimat yang benar: {st.session_state.vote['reason']}"
