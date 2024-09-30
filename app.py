@@ -1,5 +1,6 @@
 import string
 import streamlit as st
+import time
 
 from utils.correction.main_correction import generate_corrected_sentence
 from utils.text_preprocessing import text_preprocessing
@@ -64,6 +65,7 @@ detection_result = 0
 
 # Detection sentence
 if submit:
+    time.sleep(3)
     # Tokenization
     input_seq = tokenization(text)
 
