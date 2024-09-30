@@ -107,31 +107,26 @@ if detection_result == 1:
     #     if st.button("👎"):
     #         reason = vote()
 
-    # Function for correction input when the user votes "thumbs-down"
-    def vote():
-        reason = st.text_input("Masukkan kalimat yang benar")
-        if st.button("Koreksi"):
-            st.session_state.vote_reason = reason  # Store in session state
-            st.experimental_rerun()  # Rerun the app to update the UI
-        return None  # Return None until a correction is made
+# Function for correction input when the user votes "thumbs-down"
+def vote():
+    reason = st.text_input("Masukkan kalimat yang benar")
+    if st.button("Koreksi"):
+        st.session_state.vote_reason = reason  # Store in session state
+        st.experimental_rerun()  # Rerun the app to update the UI
+    return None  # Return None until a correction is made
 
-    # Main dialog logic
-    if "vote_reason" not in st.session_state:  # Check if vote has been cast
-        st.write("Apakah kalimat koreksi sudah benar?")
+# Main dialog logic
+if "vote_reason" not in st.session_state:  # Check if vote has been cast
+    st.write("Apakah kalimat koreksi sudah benar?")
 
-        col1, col2 = st.columns(2)  # Display thumbs-up and thumbs-down in two columns
-        with col1:
-            if st.button("👍"):
-                st.session_state.vote_reason = "Kalimat sudah benar"  # Store the thumbs-up reason
-                st.experimental_rerun()  # Rerun to show the result
-        with col2:
-            if st.button("👎"):
-                vote()  # Call the vote function to allow user to correct the sentence
-    else:
-        # Display the vote result
-        st.write(f"Terima kasih telah mengkoreksi! Alasan: {st.session_state.vote_reason}")
-
-    # if reason:
-    #     st.write(f"Reason for correction: {reason}")
-    # else:
-    #     st.write("No correction submitted yet.")
+    col1, col2 = st.columns(2)  # Display thumbs-up and thumbs-down in two columns
+    with col1:
+        if st.button("👍"):
+            st.session_state.vote_reason = "Kalimat sudah benar"  # Store the thumbs-up reason
+            st.experimental_rerun()  # Rerun to show the result
+    with col2:
+        if st.button("👎"):
+            vote()  # Call the vote function to allow user to correct the sentence
+else:
+    # Display the vote result
+    st.write(f"Terima kasih telah mengkoreksi! Alasan: {st.session_state.vote_reason}")
