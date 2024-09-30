@@ -25,13 +25,13 @@ max_enc_len = 14
 max_dec_len = 15
 
 # Header
-header_left, header_right = st.columns([1,5])
+header_left, header_right = st.columns([1,5], vertical_alignment="center")
 
 with header_left:
-    st.image("assets/peka.jpeg", width=200)
+    st.image("assets/peka.jpeg", width=150)
 
 with header_right:
-    st.title('Spell Error Correction')
+    st.title('Pendeteksi dan Koreksi Ejaan')
 
 text = st.text_area('Masukkan kalimat')
 
