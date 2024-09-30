@@ -109,7 +109,8 @@ if "vote" not in st.session_state and detection_result == 1:
         st.rerun()
     if st.button("👎"):
         vote()
-else:
+
+if "vote" in st.session_state:
     # Safely access the vote result from session_state
     vote_info = st.session_state.vote  # Retrieve the vote info
     st.write(f"Terima kasih telah mengkoreksi! Alasan: {vote_info['reason']}")
