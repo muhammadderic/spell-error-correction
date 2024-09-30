@@ -35,7 +35,7 @@ text = st.text_area('Masukkan kalimat')
 
 # Create a placeholder for the button
 placeholder = st.empty()
-submit = placeholder.button('Koreksi')
+submit = placeholder.button('Koreksi', key='tombol_koreksi')
 
 # Text preprocessing
 text = text_preprocessing(text)
@@ -93,7 +93,7 @@ if submit:
 
     # Show the button again
     time.sleep(1)
-    placeholder.button('Koreksi')
+    placeholder.button('Koreksi', key='tombol_koreksi_baru')
 
 # Correction sentence
 if detection_result == 1:
