@@ -60,6 +60,8 @@ model_det = load_model(model_det_fn)
 # Load dictionary
 sastrawi_dictionary = load_dictionary("./sastrawi_dictionary.txt")
 
+detection_result = 0
+
 # Detection sentence
 if submit:
     # Tokenization
