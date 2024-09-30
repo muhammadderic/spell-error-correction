@@ -25,8 +25,7 @@ max_enc_len = 14
 max_dec_len = 15
 
 # Header
-st.image("assets/peka.jpeg", caption="peka company logo")
-st.title('Spell Error Correction')
+st.image("assets/peka.jpeg", use_column_width=True)
 
 st.markdown(
     """
@@ -41,6 +40,11 @@ st.markdown(
     """, 
     unsafe_allow_html=True
 )
+
+st.title('Spell Error Correction')
+
+# Apply the CSS to the image
+st.markdown('<img class="header-img" src="path_to_your_image.jpg" style="width: 100%;">', unsafe_allow_html=True)
 
 text = st.text_area('Masukkan kalimat')
 
