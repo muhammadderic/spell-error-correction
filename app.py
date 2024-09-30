@@ -110,4 +110,4 @@ if "vote" not in st.session_state and detection_result == 1:
     if st.button("👎"):
         vote()
 else:
-    f"Kalimat yang benar: {st.session_state.vote['reason']}"
+    st.write(f"Terima kasih telah mengkoreksi! Alasan: {st.session_state.vote}")
