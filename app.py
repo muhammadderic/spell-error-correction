@@ -92,24 +92,7 @@ if detection_result == 1:
     st.text("Hasil koreksi:")
     st.info(sentence)
 
-    # reason = ""
+    with st.popover("Koreksi kalimat, jika kalimat salah"):
+        correct_sentence = st.text_input("Kalimat yang benar menurut anda adalah:")
 
-# Show the correction dialog and capture the reason
-@st.dialog("Koreksi")
-def vote():
-    reason = st.text_input("Masukkan kalimat yang benar")
-    if st.button("Koreksi"):
-        st.session_state.vote = {"reason": reason}
-        st.rerun()
-
-if "vote" not in st.session_state:
-    st.write("Apakah kalimat koreksi sudah benar?")
-    if st.button("👍"):
-        st.session_state.vote = {"reason": "Kalimat sudah benar"}
-        st.rerun()
-    if st.button("👎"):
-        vote()
-else:
-    # Safely access the vote result from session_state
-    vote_info = st.session_state.vote  # Retrieve the vote info
-    st.write(f"Terima kasih telah mengkoreksi! Alasan: {vote_info['reason']}")
+    st.write("Kalimat yang benar:", correct_sentence)
