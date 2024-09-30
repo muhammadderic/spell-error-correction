@@ -33,7 +33,9 @@ with header_right:
 # Input
 text = st.text_area('Masukkan kalimat')
 
-submit = st.button('Koreksi')
+# Create a placeholder for the button
+placeholder = st.empty()
+submit = placeholder.button('Koreksi')
 
 # Text preprocessing
 text = text_preprocessing(text)
@@ -65,7 +67,9 @@ detection_result = 0
 
 # Detection sentence
 if submit:
-    time.sleep(3)
+    # Remove the button (make it hidden)
+    placeholder.empty()
+
     # Tokenization
     input_seq = tokenization(text)
 
@@ -89,6 +93,7 @@ if submit:
 
 # Correction sentence
 if detection_result == 1:
+    time.sleep(1)
 
     sentence = generate_corrected_sentence(sastrawi_dictionary, char_set, char2int, int2char, model_corr, text)
 
@@ -98,3 +103,6 @@ if detection_result == 1:
 
         with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
             correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
+
+# Show the button again
+placeholder.button('Koreksi')
