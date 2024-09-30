@@ -4,7 +4,6 @@ import streamlit as st
 from utils.correction.main_correction import generate_corrected_sentence
 from utils.text_preprocessing import text_preprocessing
 from utils.load_model import load_model
-from utils.user_correction import show_correction_dialog
 
 # From detection folder
 from utils.detection.tokenizer import tokenization
@@ -93,8 +92,21 @@ if detection_result == 1:
     st.text("Hasil koreksi:")
     st.info(sentence)
 
+    reason = ""
+
     # Show the correction dialog and capture the reason
-    reason = show_correction_dialog()
+    @st.dialog("Koreksi")
+    def vote():
+        reason = st.text_input("Masukkan kalimat yang benar")
+        if st.button("Koreksi"):
+            return reason
+
+    if "vote" not in st.session_state:
+        st.write("Apakah kalimat koreksi sudah benar?")
+        if st.button("👍"):
+            reason = "Kalimat sudah benar"
+        if st.button("👎"):
+            reason = vote()
 
     if reason:
         st.write(f"Reason for correction: {reason}")
