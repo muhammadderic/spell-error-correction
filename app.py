@@ -42,7 +42,7 @@ st.markdown(
 st.title('Spell Error Correction')
 
 # Apply the CSS to the image
-st.markdown('<img class="header-img" src="assets/peka.jpeg" style="width: 200px;">', unsafe_allow_html=True)
+st.markdown('<img class="header-img" src="./assets/peka.jpeg" style="width: 200px;">', unsafe_allow_html=True)
 
 text = st.text_area('Masukkan kalimat')
 
