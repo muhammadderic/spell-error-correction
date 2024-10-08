@@ -62,8 +62,6 @@ model_det = load_model(model_det_fn)
 # Load dictionary
 sastrawi_dictionary = load_dictionary("./sastrawi_dictionary.txt")
 
-detection_result = 0
-
 # Detection sentence
 if submit:
     # Tokenization
@@ -87,14 +85,14 @@ if submit:
     y_pred = model_det.predict(embedding_matrix, verbose=0).argmax(axis=-1)
     detection_result = show_text_prediction(y_pred)
 
-# Correction sentence
-if detection_result == 1:
+    # Correction sentence
+    if detection_result == 1:
 
-    sentence = generate_corrected_sentence(sastrawi_dictionary, char_set, char2int, int2char, model_corr, text)
+        sentence = generate_corrected_sentence(sastrawi_dictionary, char_set, char2int, int2char, model_corr, text)
 
-    with st.spinner('Sedang mengkoreksi...'):
-        st.subheader("Hasil koreksi:")
-        st.info(sentence)
+        with st.spinner('Sedang mengkoreksi...'):
+            st.subheader("Hasil koreksi:")
+            st.info(sentence)
 
-        with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
-            correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
+            with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
+                correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
