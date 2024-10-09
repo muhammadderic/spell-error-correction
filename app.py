@@ -1,6 +1,5 @@
 import string
 import streamlit as st
-import time
 
 from utils.correction.main_correction import generate_corrected_sentence
 from utils.text_preprocessing import text_preprocessing
@@ -17,7 +16,7 @@ from utils.detection.show_text_prediction import show_text_prediction
 from utils.correction.load_dictionary import load_dictionary
 
 # Variables
-model_corr_fn = './models/model_bilstm-mh_attm_epoch-100_batch-64_ALL.h5'
+model_corr_fn = './models/model_bilstm-mh_attm_epoch-100_batch-64_ALL_new.h5'
 
 model_det_fn = './models/word_error_detection_all_subjects.h5'
 
