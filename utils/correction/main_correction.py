@@ -10,7 +10,7 @@ def generate_corrected_sentence(sastrawi_dictionary, my_dictionary, char_set, ch
     return kata_salah
 
   for word_idx, word in enumerate(sentence.split()):
-    if (word not in sastrawi_dictionary) or (word not in my_dictionary):
+    if word not in my_dictionary:
       corrected_word = correcting_word(char_set, char2int, int2char, model_corr, [word])
       break
 
