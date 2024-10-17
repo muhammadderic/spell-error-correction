@@ -20,6 +20,9 @@ def text_preprocessing(text):
     # hapus karakter non-ascii
     t = re.sub('[^\x00-\x7F]+', ' ', t)
 
+    # Remove numbers
+    t = re.sub(r'\d+', '', t)
+
     # Replace ASCII control character \x02 with a hyphen
     t = re.sub('\x02', '-', t)
 
