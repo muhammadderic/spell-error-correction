@@ -1,7 +1,7 @@
 from utils.correction.word_corrector import correcting_word
 
 # Generate corrected sentence
-def generate_corrected_sentence(sastrawi_dictionary, char_set, char2int, int2char, model_corr, sentence: str):
+def generate_corrected_sentence(sastrawi_dictionary, my_dictionary, char_set, char2int, int2char, model_corr, sentence: str):
   corrected_word = None  # Inisialisasi corrected_word
   word_idx = -1  # Inisialisasi word_idx
 
@@ -10,7 +10,7 @@ def generate_corrected_sentence(sastrawi_dictionary, char_set, char2int, int2cha
     return kata_salah
 
   for word_idx, word in enumerate(sentence.split()):
-    if word not in sastrawi_dictionary:
+    if word not in sastrawi_dictionary or word not in my_dictionary:
       corrected_word = correcting_word(char_set, char2int, int2char, model_corr, [word])
       break
 

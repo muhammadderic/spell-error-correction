@@ -59,7 +59,8 @@ model_corr = load_model(model_corr_fn)
 model_det = load_model(model_det_fn)
 
 # Load dictionary
-sastrawi_dictionary = load_dictionary("./my_dictionary.txt")
+my_dictionary = load_dictionary("./my_dictionary.txt")
+sastrawi_dictionary = load_dictionary("./sastrawi_dictionary.txt")
 
 # Detection sentence
 if submit:
@@ -87,7 +88,7 @@ if submit:
     # Correction sentence
     if detection_result == 1:
 
-        sentence = generate_corrected_sentence(sastrawi_dictionary, char_set, char2int, int2char, model_corr, text)
+        sentence = generate_corrected_sentence(sastrawi_dictionary, my_dictionary, char_set, char2int, int2char, model_corr, text)
 
         with st.spinner('Sedang mengkoreksi...'):
             st.subheader("Hasil koreksi:")
