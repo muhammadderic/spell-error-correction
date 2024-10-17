@@ -59,7 +59,7 @@ model_corr = load_model(model_corr_fn)
 model_det = load_model(model_det_fn)
 
 # Load dictionary
-sastrawi_dictionary = load_dictionary("./sastrawi_dictionary.txt")
+sastrawi_dictionary = load_dictionary("./my_dictionary.txt")
 
 # Detection sentence
 if submit:
