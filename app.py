@@ -16,7 +16,7 @@ from utils.detection.show_text_prediction import show_text_prediction
 from utils.correction.load_dictionary import load_dictionary
 
 # Variables
-model_corr_fn = './models/model_bilstm-mh_attm_epoch-100_batch-64_ALL_new.h5'
+model_corr_fn = './models/model_bilstm-mh_attm_epoch-100_batch-64_BI.h5'
 
 model_det_fn = './models/word_error_detection_all_subjects.h5'
 
