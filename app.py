@@ -14,6 +14,7 @@ from utils.detection.show_text_prediction import show_text_prediction
 
 # From correction folder
 from utils.correction.load_dictionary import load_dictionary
+from utils.correction.conditional_clean_sentence import conditional_clean_sentence
 
 # Variables
 model_corr_fn = './models/model_bilstm-mh_attm_epoch-100_batch-64_BI.h5'
@@ -99,10 +100,11 @@ if submit:
     if detection_result == 1:
 
         sentence = generate_corrected_sentence(sastrawi_dictionary, my_dictionary, char_set, char2int, int2char, model_corr, text)
+        transformed_sentence = conditional_clean_sentence(sentence)
 
         with st.spinner('Sedang mengkoreksi...'):
             st.subheader("Hasil koreksi:")
-            st.info(sentence)
+            st.info(transformed_sentence)
 
             with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
                 correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
