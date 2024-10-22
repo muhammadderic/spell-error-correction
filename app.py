@@ -90,6 +90,8 @@ if submit:
         show_text_prediction(1)
         detection_result = 1
         break
+      else:
+        detection_result = 0
 
     # Correction sentence
     if detection_result == 1:
