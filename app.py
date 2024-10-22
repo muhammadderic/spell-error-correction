@@ -91,6 +91,7 @@ if submit:
         detection_result = 1
         break
       else:
+        show_text_prediction(0)
         detection_result = 0
 
     # Correction sentence
