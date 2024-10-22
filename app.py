@@ -91,10 +91,6 @@ if submit:
         show_text_prediction(1)
         detection_result = 1
         break
-      else:
-        show_text_prediction(0)
-        detection_result = 0
-        break
 
     # Correction sentence
     if detection_result == 1:
@@ -108,3 +104,5 @@ if submit:
 
             with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
                 correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
+    else:
+        show_text_prediction(0)
