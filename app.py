@@ -93,6 +93,7 @@ if submit:
       else:
         show_text_prediction(0)
         detection_result = 0
+        break
 
     # Correction sentence
     if detection_result == 1:
