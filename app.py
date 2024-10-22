@@ -31,13 +31,13 @@ with header_right:
     st.subheader('Pendeteksi dan Koreksi Ejaan')
 
 # Input
-text = st.text_area('Masukkan kalimat')
+input_text = st.text_area('Masukkan kalimat')
 
 # Create a placeholder for the button
 submit = st.button('Koreksi', key='tombol_koreksi')
 
 # Text preprocessing
-text = text_preprocessing(text)
+text = text_preprocessing(input_text)
 
 # Create encode and decode dictionary
 char_set = list(" abcdefghijklmnopqrstuvwxyz0123456789") + [x for x in string.punctuation]
@@ -96,7 +96,7 @@ if submit:
     if detection_result == 1:
 
         sentence = generate_corrected_sentence(sastrawi_dictionary, my_dictionary, char_set, char2int, int2char, model_corr, text)
-        transformed_sentence = conditional_clean_sentence(sentence)
+        transformed_sentence = conditional_clean_sentence(sentence, input_text)
 
         with st.spinner('Sedang mengkoreksi...'):
             st.subheader("Hasil koreksi:")
