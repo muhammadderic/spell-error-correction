@@ -83,7 +83,13 @@ if submit:
 
     # Detection
     y_pred = model_det.predict(embedding_matrix, verbose=0).argmax(axis=-1)
-    detection_result = show_text_prediction(y_pred)
+
+    # Detect the wrong word
+    for word_idx, word in enumerate(text.split()):
+      if word not in my_dictionary:
+        show_text_prediction(1)
+        detection_result = 1
+        break
 
     # Correction sentence
     if detection_result == 1:
