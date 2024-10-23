@@ -65,6 +65,7 @@ sastrawi_dictionary = load_dictionary("./sastrawi_dictionary.txt")
 
 # Detection sentence
 if submit:
+    detection_result = 0
     # Tokenization
     input_seq = tokenization(text)
 
