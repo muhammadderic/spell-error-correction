@@ -1,5 +1,7 @@
 import string
 import streamlit as st
+import numpy as np
+import tensorflow as tf
 
 from utils.correction.main_correction import generate_corrected_sentence
 from utils.text_preprocessing import text_preprocessing
@@ -63,6 +65,75 @@ model_det = load_model(model_det_fn)
 my_dictionary = load_dictionary("./my_dictionary.txt")
 sastrawi_dictionary = load_dictionary("./sastrawi_dictionary.txt")
 
+# ===================
+# Correction Function
+# ===================
+max_enc_len = 14
+
+# Convert word to vector
+def encode_word(word: list):
+  encoded_word = np.zeros((1, max_enc_len, len(char_set)), dtype='float32')
+
+  for _,inp in enumerate(word):
+    for row, char in enumerate(inp):
+      encoded_word[0, row, char2int[char]] = 1
+
+  return encoded_word
+
+max_dec_len = 15
+
+# Correcting word
+def correcting_word(word):
+  # encoding kata masukan (word to vector)
+  encoder_inputs = encode_word(word)
+
+  # decoding kata masukan
+  decoder_inputs = np.zeros((1, max_dec_len, len(char_set)+2), dtype='float32')
+  decoder_inputs[:, 0, char2int['\t']] = 1
+
+  input_word = ''
+  pred_word = ''
+
+  # melakukan koreksi per-huruf dari kata masukan
+  for idx in range(decoder_inputs.shape[1]-1):
+    pred_arr = model_corr.predict([
+        tf.constant(encoder_inputs),
+        tf.constant(decoder_inputs)
+    ], verbose=0)
+
+    input2_idx = np.argmax(pred_arr[:, idx, :], axis=1)[0]
+    decoder_inputs[:, idx+1, input2_idx] = 1
+
+    input1_idx = np.argmax(encoder_inputs[:, idx, :], axis=1)[0]
+
+    pred_word += int2char[input2_idx]
+    input_word += int2char[input1_idx]
+
+    if (pred_word[-1] == '\n'):
+      break
+
+  # menghapus next line character
+  pred_word = pred_word[:-1]
+
+  return pred_word
+
+# Generate corrected sentence
+def generate_corrected_sentence(sentence: str):
+  corrected_word = None  # Inisialisasi corrected_word
+  word_idx = -1  # Inisialisasi word_idx
+
+  for word_idx, word in enumerate(sentence.split()):
+    if word not in my_dictionary:
+      corrected_word = correcting_word([word])
+      break
+
+  if corrected_word is None:  # Jika tidak ada kata yang berbeda
+    return sentence  # Mengembalikan kalimat asli tanpa perubahan
+
+  corrected_sentence = sentence.split()
+  corrected_sentence[word_idx] = corrected_word
+  return " ".join(corrected_sentence)
+
 # Detection sentence
 if submit:
     detection_result = 0
@@ -95,8 +166,8 @@ if submit:
 
     # Correction sentence
     if detection_result == 1:
-
-        sentence = generate_corrected_sentence(sastrawi_dictionary, my_dictionary, char_set, char2int, int2char, model_corr, text)
+        
+        sentence = generate_corrected_sentence(text)
         transformed_sentence = conditional_clean_sentence(sentence, input_text)
 
         with st.spinner('Sedang mengkoreksi...'):
