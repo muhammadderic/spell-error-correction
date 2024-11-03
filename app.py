@@ -3,7 +3,6 @@ import streamlit as st
 import numpy as np
 import tensorflow as tf
 
-from utils.correction.main_correction import generate_corrected_sentence
 from utils.text_preprocessing import text_preprocessing
 from utils.load_model import load_model
 
