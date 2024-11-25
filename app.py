@@ -175,5 +175,13 @@ if submit:
 
             with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
                 correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
+
+                # Add a submit button
+                if st.button("Simpan Kalimat Koreksi"):
+                    if correct_sentence.strip():  # Check if the user entered a valid input
+                        st.success(f"Kalimat koreksi telah dikirim: {correct_sentence}")
+                        # Optionally, handle the corrected sentence (e.g., save to database)
+                    else:
+                        st.warning("Mohon masukkan kalimat koreksi sebelum mengirim.")
     else:
         show_text_prediction(0)
