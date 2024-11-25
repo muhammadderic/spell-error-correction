@@ -178,7 +178,6 @@ if submit:
                 correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
 
                 # Add a submit button
-                if st.button("Simpan Kalimat Koreksi"):
-                    add_correct_sentence(transformed_sentence, correct_sentence)
+                add_correct_sentence(transformed_sentence, correct_sentence)
     else:
         show_text_prediction(0)

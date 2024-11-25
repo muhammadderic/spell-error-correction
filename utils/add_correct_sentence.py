@@ -7,4 +7,5 @@ def add_correct_sentence(kalimat_salah, kalimat_koreksi):
 
   supabase: Client = create_client(url, key)
 
-  supabase.table("spelling_correction").insert({"kalimat_salah": kalimat_salah, "kalimat_benar": kalimat_koreksi}).execute()
+  if st.button("Simpan Kalimat Koreksi"):
+    supabase.table("spelling_correction").insert({"kalimat_salah": kalimat_salah, "kalimat_benar": kalimat_koreksi}).execute()
