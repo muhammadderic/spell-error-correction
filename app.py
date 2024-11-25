@@ -5,6 +5,7 @@ import tensorflow as tf
 
 from utils.text_preprocessing import text_preprocessing
 from utils.load_model import load_model
+from utils.add_correct_sentence import add_correct_sentence
 
 # From detection folder
 from utils.detection.tokenizer import tokenization
@@ -179,6 +180,7 @@ if submit:
                 # Add a submit button
                 if st.button("Simpan Kalimat Koreksi"):
                     if correct_sentence.strip():  # Check if the user entered a valid input
+                        add_correct_sentence(transformed_sentence, correct_sentence)
                         st.success(f"Kalimat koreksi telah dikirim: {correct_sentence}")
                         # Optionally, handle the corrected sentence (e.g., save to database)
                     else:
