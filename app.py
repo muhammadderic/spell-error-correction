@@ -2,6 +2,7 @@ import string
 import streamlit as st
 import numpy as np
 import tensorflow as tf
+import time
 
 from utils.text_preprocessing import text_preprocessing
 from utils.load_model import load_model
@@ -181,6 +182,7 @@ if submit:
                 if st.button("Simpan Kalimat Koreksi"):
                     if correct_sentence.strip():  # Ensure input is not empty
                         add_correct_sentence(transformed_sentence, correct_sentence)
+                        time.sleep(3)
                         st.success("Kalimat koreksi berhasil disimpan!")
                     else:
                         st.warning("Mohon masukkan kalimat koreksi sebelum menyimpan.")
