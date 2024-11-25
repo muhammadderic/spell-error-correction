@@ -6,7 +6,7 @@ import time
 
 from utils.text_preprocessing import text_preprocessing
 from utils.load_model import load_model
-# from utils.add_correct_sentence import add_correct_sentence
+from utils.add_correct_sentence import add_correct_sentence
 
 # From detection folder
 from utils.detection.tokenizer import tokenization
@@ -18,13 +18,6 @@ from utils.detection.show_text_prediction import show_text_prediction
 # From correction folder
 from utils.correction.load_dictionary import load_dictionary
 from utils.correction.conditional_clean_sentence import conditional_clean_sentence
-
-from supabase import create_client, Client
-
-# Initialize Supabase client once
-url = st.secrets["SUPABASE_URL"]
-key = st.secrets["SUPABASE_KEY"]
-supabase: Client = create_client(url, key)
 
 # Variables
 model_corr_fn = './models/model_bilstm-mh_attm_epoch-100_batch-64_BI.h5'
@@ -188,13 +181,9 @@ if submit:
                 # Add a submit button
                 if st.button("Simpan Kalimat Koreksi"):
                     if correct_sentence.strip():  # Ensure input is not empty
-                        supabase.table("spelling_correction").insert({
-                            "kalimat_salah": transformed_sentence,
-                            "kalimat_benar": correct_sentence
-                        }).execute()
+                        add_correct_sentence(transformed_sentence, correct_sentence)
                         st.success("Kalimat koreksi berhasil disimpan!")
                     else:
                         st.warning("Mohon masukkan kalimat koreksi sebelum menyimpan.")
-                time.sleep(3)
     else:
         show_text_prediction(0)
