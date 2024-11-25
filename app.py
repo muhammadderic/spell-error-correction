@@ -6,7 +6,7 @@ import time
 
 from utils.text_preprocessing import text_preprocessing
 from utils.load_model import load_model
-from utils.add_correct_sentence import add_correct_sentence
+# from utils.add_correct_sentence import add_correct_sentence
 
 # From detection folder
 from utils.detection.tokenizer import tokenization
