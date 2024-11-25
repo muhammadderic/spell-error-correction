@@ -3,4 +3,4 @@ tensorflow==2.17.0
 keras
 numpy
 gensim
-supabase
+supabase==2.9.1
