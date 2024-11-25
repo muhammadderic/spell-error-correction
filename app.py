@@ -186,5 +186,6 @@ if submit:
                         st.success("Kalimat koreksi berhasil disimpan!")
                     else:
                         st.warning("Mohon masukkan kalimat koreksi sebelum menyimpan.")
+                time.sleep(3)
     else:
         show_text_prediction(0)
