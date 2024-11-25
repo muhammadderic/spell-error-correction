@@ -179,6 +179,10 @@ if submit:
 
                 # Add a submit button
                 if st.button("Simpan Kalimat Koreksi"):
-                    add_correct_sentence(transformed_sentence, correct_sentence)
+                    if correct_sentence.strip():  # Ensure input is not empty
+                        add_correct_sentence(transformed_sentence, correct_sentence)
+                        st.success("Kalimat koreksi berhasil disimpan!")
+                    else:
+                        st.warning("Mohon masukkan kalimat koreksi sebelum menyimpan.")
     else:
         show_text_prediction(0)
