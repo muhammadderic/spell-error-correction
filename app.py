@@ -180,6 +180,7 @@ if submit:
                 
                 # Add a submit button
                 if st.button("Simpan Kalimat Koreksi"):
+                    st.success(correct_sentence)
                     add_correct_sentence(transformed_sentence, correct_sentence)
                     # if correct_sentence.strip():  # Ensure input is not empty
                     #     st.success("Kalimat koreksi berhasil disimpan!")
