@@ -177,8 +177,8 @@ if submit:
             st.subheader("Hasil koreksi:")
             st.info(transformed_sentence)
 
-            with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
-            # with st.container():
+            # with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
+            with st.container():
                 # Insert data into Supabase
                 correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
                 # Add a submit button
