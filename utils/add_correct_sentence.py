@@ -6,7 +6,7 @@ def add_correct_sentence(kalimat_salah='default', kalimat_koreksi='default'):
     url = st.secrets["SUPABASE_URL"]
     key = st.secrets["SUPABASE_KEY"]
     supabase: Client = create_client(url, key)
-    
+
     # Validate input
     if not kalimat_salah.strip() or not kalimat_koreksi.strip():
         st.error("Both 'kalimat_salah' and 'kalimat_koreksi' must be provided.")
@@ -14,11 +14,12 @@ def add_correct_sentence(kalimat_salah='default', kalimat_koreksi='default'):
 
     try:
         # Insert data into Supabase
-        supabase.table("spelling_correction").insert({
-                            "kalimat_salah": kalimat_salah,
-                            "kalimat_benar": kalimat_koreksi
-                        }).execute()
+        if st.button("Simpan"):
+            supabase.table("spelling_correction").insert({
+                                "kalimat_salah": kalimat_salah,
+                                "kalimat_benar": kalimat_koreksi
+                            }).execute()
 
-        st.success("Data successfully inserted!")
+            st.success("Data successfully inserted!")
     except Exception as e:
         st.error(f"Failed to insert data: {e}")
