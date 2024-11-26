@@ -181,13 +181,13 @@ if submit:
             # with st.container():
                 # Insert data into Supabase
                 correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
-                add_correct_sentence(transformed_sentence, correct_sentence)
                 # Add a submit button
                 # if st.button("Simpan Kalimat Koreksi"):
                     # if correct_sentence.strip():  # Ensure input is not empty
                     #     st.success("Kalimat koreksi berhasil disimpan!")
                     # else:
                     #     st.warning("Mohon masukkan kalimat koreksi sebelum menyimpan.")
+            add_correct_sentence(transformed_sentence, correct_sentence)
 
     else:
         show_text_prediction(0)
