@@ -7,12 +7,17 @@ def add_correct_sentence(kalimat_salah, correct_sentence):
     key = st.secrets["SUPABASE_KEY"]
     supabase: Client = create_client(url, key)
 
-    if st.button("Simpan"):
-        if correct_sentence.strip():  # Ensure valid input
-            supabase.table("spelling_correction").insert({
+    supabase.table("spelling_correction").insert({
                 "kalimat_salah": kalimat_salah,
                 "kalimat_benar": correct_sentence
             }).execute()
-            st.success("Data successfully inserted!")
-        else:
-            st.warning("Kalimat koreksi tidak boleh kosong.")
+
+    # if st.button("Simpan"):
+    #     if correct_sentence.strip():  # Ensure valid input
+    #         supabase.table("spelling_correction").insert({
+    #             "kalimat_salah": kalimat_salah,
+    #             "kalimat_benar": correct_sentence
+    #         }).execute()
+    #         st.success("Data successfully inserted!")
+    #     else:
+    #         st.warning("Kalimat koreksi tidak boleh kosong.")
