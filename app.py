@@ -167,7 +167,6 @@ if submit:
 
     # Correction sentence
     if detection_result == 1:
-        
         sentence = generate_corrected_sentence(text)
         transformed_sentence = conditional_clean_sentence(sentence, input_text)
 
@@ -175,16 +174,18 @@ if submit:
             st.subheader("Hasil koreksi:")
             st.info(transformed_sentence)
 
-            with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
-                st.write("Silakan koreksi kalimat jika diperlukan:")
-                add_correct_sentence(transformed_sentence)
-                
-                # Add a submit button
-                # if st.button("Simpan Kalimat Koreksi"):
-                    # st.success(correct_sentence)
-                    # if correct_sentence.strip():  # Ensure input is not empty
-                    #     st.success("Kalimat koreksi berhasil disimpan!")
-                    # else:
-                    #     st.warning("Mohon masukkan kalimat koreksi sebelum menyimpan.")
+        with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
+            st.write("Silakan koreksi kalimat jika diperlukan:")
+            # Insert data into Supabase
+            correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
+            add_correct_sentence(transformed_sentence, correct_sentence)
+            
+            # Add a submit button
+            # if st.button("Simpan Kalimat Koreksi"):
+                # st.success(correct_sentence)
+                # if correct_sentence.strip():  # Ensure input is not empty
+                #     st.success("Kalimat koreksi berhasil disimpan!")
+                # else:
+                #     st.warning("Mohon masukkan kalimat koreksi sebelum menyimpan.")
     else:
         show_text_prediction(0)
