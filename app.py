@@ -176,12 +176,12 @@ if submit:
             st.info(transformed_sentence)
 
             with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
-                correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
-                add_correct_sentence(transformed_sentence, correct_sentence)
                 
                 # Add a submit button
                 if st.button("Simpan Kalimat Koreksi"):
-                    st.success(correct_sentence)
+                    correct_sentence = st.text_area("Kalimat yang benar menurut anda adalah:")
+                    add_correct_sentence(transformed_sentence, correct_sentence)
+                    # st.success(correct_sentence)
                     # if correct_sentence.strip():  # Ensure input is not empty
                     #     st.success("Kalimat koreksi berhasil disimpan!")
                     # else:
