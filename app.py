@@ -176,6 +176,7 @@ if submit:
             st.info(transformed_sentence)
 
             with st.popover("Koreksi kalimat, jika kalimat salah", use_container_width=True):
+                st.write("Silakan koreksi kalimat jika diperlukan:")
                 add_correct_sentence(transformed_sentence)
                 
                 # Add a submit button
